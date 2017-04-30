@@ -2951,19 +2951,19 @@ input[type="radio"] + label:before {
 }
 
 .wrapper.style1 .icon.major:before {
-    color: #3C42A6;
+    color: #0D47A1;
 }
 
 .wrapper.style1-alt .icon.major:before {
-    color: #243382;
+    color: #1565C0;
 }
 
 .wrapper.style2 .icon.major:before {
-    color: #243382;
+    color: #1976D2;
 }
 
 .wrapper.style2-alt .icon.major:before {
-    color: #3E4094;
+    color: #1E88E5;
 }
 
 .wrapper.style3 .icon.major:before {
@@ -3637,7 +3637,7 @@ table.alt tfoot {
 }
 
 .wrapper.alt {
-    background-color: #1A237E;
+    background-color: #0D47A1;
 }
 
 .wrapper.style1 {
@@ -3768,7 +3768,7 @@ body.is-ie .wrapper.fullscreen {
     display: -webkit-flex;
     display: -ms-flex;
     display: flex;
-    background-color: #5e42a6;
+    background-color: #0D47A1;
     cursor: default;
     padding: 1.75em 2em;
 }
