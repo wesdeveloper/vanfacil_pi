@@ -53,8 +53,8 @@ const indexController = {
 		let transporter = nodemailer.createTransport({
 			host: "smtp.gmail.com",
 			service: 'Gmail',
-			port: 465,
-			secure: true, // secure:true for port 465, secure:false for port 587
+			port: 587,
+			secure: false, // secure:true for port 465, secure:false for port 587
 			auth: {
 				user: config.email,
 				pass: config.senha
