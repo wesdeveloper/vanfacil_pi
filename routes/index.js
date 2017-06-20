@@ -1,12 +1,15 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const indexController = require("../controllers/IndexController")
+const indexController = require('../controllers/IndexController')
 
 /* GET home page. */
-router.get('/', indexController.index);
+router.get('/', indexController.index)
 
 /* POST sendemail route */
-router.post('/sendemail', indexController.sendemail);
+router.post('/sendemail', indexController.sendemail)
 
-module.exports = router;
+/* POST solicita vaga route */
+router.post('/solicitaVaga', indexController.solicitaVaga)
+
+module.exports = router

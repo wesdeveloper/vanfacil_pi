@@ -70,6 +70,43 @@
         </section>
     </section>
 
+    <!-- solicitaVaga -->
+    <% let locais = ['Belém', 'Eldorado', 'Novo Eldorado', 'Três Barras', 'Riacho das Pedras', 'Darcy Ribeiro', 'Icaiveira'] %>
+    <section id="solicitaVaga" class="wrapper style3 fade-up">
+        <div class="inner">
+            <h2>Solicitar vaga</h2>
+            <p>Preencha o formulário abaixo para realizar a solicitação de seu vaga e em breve entramos em contato para mais informações.</p>
+                <section>
+                    <form method="post" action="/solicitaVaga">
+                        <div class="field first">
+                            <label for="name">Nome Completo</label>
+                            <input type="text" name="name" id="name" placeholder="Nome completo" required/>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" placeholder="email" required/>
+                        </div>
+                        <div class="field">
+                            <label for="telefone">Telefone</label>
+                            <input type="text" name="telefone" id="telefone" placeholder="Telefone de contato" required/>
+                        </div>
+                        <div class="field">
+                            <label for="localDestino">Local de Destino</label>
+                            <select name="localDestino" id="localDestino" required>
+                                <option value="default">Selecionar</option>
+                                <% for(let i = 0; i < locais.length; i++) { %>
+                                    <option value="<%=locais[i]%>"><%=locais[i]%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <input type="submit" class="button submit" value="Solicitar Vaga" />
+                        </div>
+                    </form>
+                </section>
+        </div>
+    </section>
+
     <!-- two -->
     <section id="two" class="wrapper style1 fade-up">
         <div class="inner">
