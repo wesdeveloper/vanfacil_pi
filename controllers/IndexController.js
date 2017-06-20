@@ -55,7 +55,7 @@ const indexController = {
 		let content = new helper.Content('text/plain', `O usuário ${name}, que possui o telefone: ${telefone} e email:${email_sender}. Deseja ir para ${localDestino}`)
 		let mail = new helper.Mail(fromEmail, subject, toEmail, content)
 
-		let sg = require('sendgrid')('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')
+		let sg = require('sendgrid')(process.env.SENDGRID_API_KEY)
 
 		let request = sg.emptyRequest({
 			method: 'POST',
