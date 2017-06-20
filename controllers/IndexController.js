@@ -53,34 +53,17 @@ const indexController = {
 		let toEmail = new helper.Email(config.email)
 		let subject = 'Send by ' + name
 		let content = new helper.Content('text/plain', `O usuário ${name}, que possui o telefone: ${telefone} e email:${email_sender}. Deseja ir para ${localDestino}`)
+		let mail = new helper.mail(fromEmail, subject, toEmail, content)
 
-		// create transporter
-		let transporter = nodemailer.createTransport({
-			host: "smtp.gmail.com",
-			service: 'Gmail',
-			port: 587,
-			secure: false, // secure:true for port 465, secure:false for port 587
-			auth: {
-				user: config.email,
-				pass: config.senha
-			}
+		let sg = require('sendgrid')('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')
+
+		let request = sg.emptyRequest({
+			method: 'POST',
+			path: '/v3/mail/send',
+			body: mail.toJSON()
 		})
 
-		// setup email
-		// let mailOptions = {
-		// 	to: config.email,
-		// 	subject: 'Send by ' + name,
-		// 	text: 'Solicitação de vaga',
-		// 	html: message
-		// }
-		
-		// send email with defined transport object	
-		transporter.sendMail({
-			from: `"Van facil" <${config.email}>`,
-			to: `"Van facil" <${config.email}>`,
-			subject: 'Send by ' + name,
-			text: message
-		}, (err, info) => {
+		sg.Api(request, (err, response) => {
 			if(err) {
 				console.warn(err)
 				res.send('erro ao enviar email')
@@ -88,8 +71,7 @@ const indexController = {
 				console.log(info)
 				res.redirect('back')
 			}
-			
-		})
+		})			
 	}
 }
 
