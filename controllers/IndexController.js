@@ -3,10 +3,10 @@ const nodemailer = require('nodemailer')
 
 const indexController = {
 	// Route Index
-	index: (req, res, next) => {
+	index: (req, res) => {
 		res.render('index')
 	},
-	sendemail: (req, res, next) => {
+	sendemail: (req, res) => {
 
 		// Data about email
 		const name = req.body.name
@@ -31,7 +31,7 @@ const indexController = {
 		}
 
 		// send email with defined transport object	
-		transporter.sendMail(mailOptions, (err, info) => {
+		transporter.sendMail(mailOptions, (err) => {
 			if(err) {
 				res.send('erro ao enviar email')
 			}
