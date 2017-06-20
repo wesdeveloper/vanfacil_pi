@@ -52,8 +52,8 @@ const indexController = {
 
 		// create transporter
 		let server = emailjs.server.connect({
-			user: config.email,
-			password: config.senha,
+			user: process.env.GMAIL_SMTP_USER,
+			password: process.env.GMAIL_SMTP_PASSWORD,
 			host: "smtp.gmail.com",
 			ssl: true
 		})
@@ -61,8 +61,8 @@ const indexController = {
 		// send email with defined transport object	
 		server.send({
 			text: 'Solicitação de vaga',
-			from: config.email,
-			to: config.email,
+			from: process.env.GMAIL_SMTP_USER,
+			to: process.env.GMAIL_SMTP_USER,
 			subject: 'Send by ' + name,
 			attachment:[
 				{data: message}
