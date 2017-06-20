@@ -1,13 +1,12 @@
 const config = require('../config/config')
 const nodemailer = require('nodemailer')
-const emailjs = require('emailjs')
 
 const indexController = {
 	// Route Index
-	index: (req, res) => {
+	index: (req, res, next) => {
 		res.render('index')
 	},
-	sendemail: (req, res) => {
+	sendemail: (req, res, next) => {
 
 		// Data about email
 		const name = req.body.name
@@ -18,8 +17,8 @@ const indexController = {
 		let transporter = nodemailer.createTransport({
 			service: 'Gmail',
 			auth: {
-				user: 'process.env.CRAWLER_MAIL',
-				pass: 'process.env.CRAWLER_PWD'
+				user: config.email,
+				pass: config.senha
 			}
 		})
 
@@ -51,28 +50,38 @@ const indexController = {
 		const message = `O usuário ${name}, que possui o telefone: ${telefone} e email:${email_sender}. Deseja ir para ${localDestino}`
 
 		// create transporter
-		let server = emailjs.server.connect({
-			user: process.env.GMAIL_SMTP_USER,
-			password: process.env.GMAIL_SMTP_PASSWORD,
+		let transporter = nodemailer.createTransport({
 			host: "smtp.gmail.com",
-			ssl: true
+			service: 'Gmail',
+			port: 465,
+			secure: true, // secure:true for port 465, secure:false for port 587
+			auth: {
+				user: config.email,
+				pass: config.senha
+			}
 		})
 
+		// setup email
+		// let mailOptions = {
+		// 	to: config.email,
+		// 	subject: 'Send by ' + name,
+		// 	text: 'Solicitação de vaga',
+		// 	html: message
+		// }
+		
 		// send email with defined transport object	
-		server.send({
-			text: 'Solicitação de vaga',
-			from: process.env.GMAIL_SMTP_USER,
-			to: process.env.GMAIL_SMTP_USER,
+		transporter.sendMail({
+			from: `"Van facil" <${config.email}>`,
+			to: `"Van facil" <${config.email}>`,
 			subject: 'Send by ' + name,
-			attachment:[
-				{data: message}
-			]
+			text: message
 		}, (err, info) => {
 			if(err) {
 				console.warn(err)
 				res.send('erro ao enviar email')
 			} else {
 				console.log(info)
+				transporter.close()
 				res.redirect('back')
 			}
 			
