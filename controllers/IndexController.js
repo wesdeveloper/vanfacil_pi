@@ -1,5 +1,6 @@
 const config = require('../config/config')
 const nodemailer = require('nodemailer')
+const emailjs = require('emailjs')
 
 const indexController = {
 	// Route Index
@@ -50,30 +51,28 @@ const indexController = {
 		const message = `O usuário ${name}, que possui o telefone: ${telefone} e email:${email_sender}. Deseja ir para ${localDestino}`
 
 		// create transporter
-		let transporter = nodemailer.createTransport({
-			service: 'Gmail',
-			auth: {
-				user: 'process.env.CRAWLER_MAIL',
-				pass: 'process.env.CRAWLER_PWD'
-			}
+		let server = emailjs.server.connect({
+			user: config.email,
+			password: config.senha,
+			host: "smtp.gmail.com",
+			ssl: true
 		})
 
-		// setup email
-		let mailOptions = {
-			to: 'process.env.CRAWLER_MAIL',
-			subject: 'Send by ' + name,
-			text: 'Solicitação de vaga',
-			html: message
-		}
-		
 		// send email with defined transport object	
-		transporter.sendMail(mailOptions, (err, info) => {
+		server.send({
+			text: 'Solicitação de vaga',
+			from: config.email,
+			to: config.email,
+			subject: 'Send by ' + name,
+			attachment:[
+				{data: message}
+			]
+		}, (err, info) => {
 			if(err) {
 				console.warn(err)
 				res.send('erro ao enviar email')
 			} else {
 				console.log(info)
-				transporter.close()
 				res.redirect('back')
 			}
 			
