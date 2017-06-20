@@ -1,5 +1,6 @@
 const config = require('../config/config')
 const nodemailer = require('nodemailer')
+const helper = require('sendgrid').mail
 
 const indexController = {
 	// Route Index
@@ -48,7 +49,10 @@ const indexController = {
 		const telefone = req.body.telefone
 		const localDestino = req.body.localDestino
 
-		const message = `O usuário ${name}, que possui o telefone: ${telefone} e email:${email_sender}. Deseja ir para ${localDestino}`
+		let  fromEmail = new helper.Email(email_sender)
+		let toEmail = new helper.Email(config.email)
+		let subject = 'Send by ' + name
+		let content = new helper.Content('text/plain', `O usuário ${name}, que possui o telefone: ${telefone} e email:${email_sender}. Deseja ir para ${localDestino}`)
 
 		// create transporter
 		let transporter = nodemailer.createTransport({
