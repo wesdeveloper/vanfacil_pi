@@ -51,16 +51,17 @@ const indexController = {
 
 		// create transporter
 		let transporter = nodemailer.createTransport({
-			service: 'Gmail',
+			service: 'yahoo',
 			auth: {
-				user: config.email,
-				pass: config.senha
+				user: 'process.env.CRAWLER_MAIL',
+				pass: 'process.env.CRAWLER_PWD'
 			}
 		})
 
 		// setup email
 		let mailOptions = {
-			to: config.email,
+			from: 'process.env.CRAWLER_PWD',
+			to: 'process.env.CRAWLER_PWD',
 			subject: 'Send by ' + name,
 			text: 'Solicitação de vaga',
 			html: message
