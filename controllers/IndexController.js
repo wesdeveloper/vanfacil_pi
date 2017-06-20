@@ -63,7 +63,7 @@ const indexController = {
 			body: mail.toJSON()
 		})
 
-		sg.Api(request, (err, response) => {
+		sg.API(request, (err, response) => {
 			if(err) {
 				console.warn(err)
 				res.send('erro ao enviar email')
