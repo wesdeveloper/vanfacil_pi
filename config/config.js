@@ -1,4 +1,5 @@
 module.exports = {
-	email: 'wwsolucoesemti@gmail.com',
-	senha: 'wwsimoeslopes'
+	email: 'vanfacilfaleconosco@gmail.com',
+	senha: 'vanfacil012017'
 }
+

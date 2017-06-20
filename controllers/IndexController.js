@@ -1,13 +1,13 @@
 const config = require('../config/config')
 const nodemailer = require('nodemailer')
-const helper = require('sendgrid').mail
+const EMAIL = require('../models/email')
 
 const indexController = {
 	// Route Index
-	index: (req, res, next) => {
+	index: (req, res) => {
 		res.render('index')
 	},
-	sendemail: (req, res, next) => {
+	sendemail: (req, res) => {
 
 		// Data about email
 		const name = req.body.name
@@ -32,7 +32,7 @@ const indexController = {
 		}
 
 		// send email with defined transport object	
-		transporter.sendMail(mailOptions, (err, info) => {
+		transporter.sendMail(mailOptions, (err) => {
 			if(err) {
 				console.log(err)
 				res.send('erro ao enviar email')
@@ -41,37 +41,25 @@ const indexController = {
 		})
 
 	},
-	solicitaVaga: (req, res, next) => {
+	solicitaVaga: (req, res) => {
 		console.log('solicitando vaga')
 		// Data about email
-		const name = req.body.name
-		const email_sender = req.body.email
-		const telefone = req.body.telefone
-		const localDestino = req.body.localDestino
+		const email = {
+			name: req.body.name,
+			email_sender: req.body.email,
+			telefone: req.body.telefone,
+			localDestino: req.body.localDestino
+		}
 
-		let  fromEmail = new helper.Email(email_sender)
-		let toEmail = new helper.Email(config.email)
-		let subject = 'Send by ' + name
-		let content = new helper.Content('text/plain', `O usuário ${name}, que possui o telefone: ${telefone} e email:${email_sender}. Deseja ir para ${localDestino}`)
-		let mail = new helper.Mail(fromEmail, subject, toEmail, content)
+		let createEmail = new EMAIL()
 
-		let sg = require('sendgrid')('process.env.SENDGRID_API_KEY')
+		createEmail.name = email.name
+		createEmail.email = email.email_sender
+		createEmail.telefone = email.telefone
+		createEmail.localDestino = email.localDestino
 
-		let request = sg.emptyRequest({
-			method: 'POST',
-			path: '/v3/mail/send',
-			body: mail.toJSON()
-		})
+		createEmail.save((err) => err ? res.send(err) : res.redirect('back'))
 
-		sg.API(request, (err, response) => {
-			if(err) {
-				console.warn(err)
-				res.send('erro ao enviar email')
-			} else {
-				console.log(info)
-				res.redirect('back')
-			}
-		})			
 	}
 }
 
