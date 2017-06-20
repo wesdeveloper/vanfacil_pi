@@ -17,8 +17,8 @@ const indexController = {
 		let transporter = nodemailer.createTransport({
 			service: 'Gmail',
 			auth: {
-				user: config.email,
-				pass: config.senha
+				user: 'process.env.CRAWLER_MAIL',
+				pass: 'process.env.CRAWLER_PWD'
 			}
 		})
 
@@ -31,7 +31,7 @@ const indexController = {
 		}
 
 		// send email with defined transport object	
-		transporter.sendMail(mailOptions, (err) => {
+		transporter.sendMail(mailOptions, (err, info) => {
 			if(err) {
 				res.send('erro ao enviar email')
 			}
@@ -51,7 +51,7 @@ const indexController = {
 
 		// create transporter
 		let transporter = nodemailer.createTransport({
-			service: 'yahoo',
+			service: 'Gmail',
 			auth: {
 				user: 'process.env.CRAWLER_MAIL',
 				pass: 'process.env.CRAWLER_PWD'
@@ -60,8 +60,7 @@ const indexController = {
 
 		// setup email
 		let mailOptions = {
-			from: 'process.env.CRAWLER_PWD',
-			to: 'process.env.CRAWLER_PWD',
+			to: 'process.env.CRAWLER_MAIL',
 			subject: 'Send by ' + name,
 			text: 'Solicitação de vaga',
 			html: message
