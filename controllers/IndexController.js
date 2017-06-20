@@ -33,6 +33,7 @@ const indexController = {
 		// send email with defined transport object	
 		transporter.sendMail(mailOptions, (err, info) => {
 			if(err) {
+				console.log(err)
 				res.send('erro ao enviar email')
 			}
 			res.redirect('back')
@@ -81,7 +82,6 @@ const indexController = {
 				res.send('erro ao enviar email')
 			} else {
 				console.log(info)
-				transporter.close()
 				res.redirect('back')
 			}
 			
