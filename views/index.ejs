@@ -77,7 +77,7 @@
             <h2>Solicitar vaga</h2>
             <p>Preencha o formulário abaixo para realizar a solicitação de seu vaga e em breve entramos em contato para mais informações.</p>
                 <section>
-                    <form method="post" action="/solicitaVaga">
+                    <form id="solicitaVagaForm" method="post" action="/solicitaVaga">
                         <div class="field first">
                             <label for="name">Nome Completo</label>
                             <input type="text" name="name" id="name" placeholder="Nome completo" required/>
@@ -115,7 +115,7 @@
                 conosco, para saber mais informações:</p>
             <div class="split style1">
                 <section>
-                    <form method="post" action="/sendemail">
+                    <form id="sendEmailForm" method="post" action="/sendemail">
                         <div class="field half first">
                             <label for="name">Nome</label>
                             <input type="text" name="name" id="name"/>
@@ -170,11 +170,57 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/jquery.validate.pt-br.js"></script>
 <script src="assets/js/skel.min.js"></script>
 <script src="assets/js/util.js"></script>
 <!--[if lte IE 8]>
 <script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
+<script>
+    $(document).ready(() => {
+        console.log('lol')
+        $("#solicitaVagaForm").validate({
+            rules:{
+                name: {
+                    required: true,
+                    minlength: 3
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                telefone: {
+                    required: true,
+                    minlength: 8
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                localDestino: {
+                    required:true
+                }
+            }
+        })
 
+        $("#sendEmailForm").validate({
+            rules:{
+                name: {
+                    required: true,
+                    minlength: 3
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                message: {
+                    required: true,
+                    minlength: 10
+                }
+            }
+        })
+    })
+</script>
 </body>
 </html>
