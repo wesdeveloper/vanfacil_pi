@@ -1,16 +1,16 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
     <title>Van Fácil</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
     <script src="assets/js/ie/html5shiv.js"></script>
     <link rel="stylesheet" href="assets/css/main.css"/>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="shortcut icon" href="images/van_fácil_logotipo.png"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#283593">
 </head>
 <body>
 
@@ -29,7 +29,9 @@
                 Vem com a gente, vamos te mostrar nossos diferenciais!!
             </p>
             <ul class="actions">
-                <li><a href="#one" class="button scrolly">Saiba mais</a></li>
+                <li>
+                    <a href="#one" class="button scrolly">Saiba mais</a>
+                </li>
             </ul>
         </div>
 
@@ -50,7 +52,6 @@
 
                     <p>Bem... Isso não importa! Resolvemos para você.</p>
 
-
                 </div>
             </div>
         </section>
@@ -61,7 +62,7 @@
                     <h2>Como Funciona?</h2>
                     <p> Com o Van Fácil você seleciona o destino, quais dias irá utilizar o
                         serviço e até mesmo as características que deseja na van,
-                        que indicamos as melhores opções dentro das caracteristicas que voce
+                        que indicamos as melhores opções dentro das caracteristicas que você
                         escolheu. Daí é só entrar em contato
                         com o motorista e fechar negócio.
                         Tudo com a maior segurança e rapidez.</p>
@@ -75,96 +76,58 @@
     <section id="solicitaVaga" class="wrapper style3 fade-up">
         <div class="inner">
             <h2>Solicitar vaga</h2>
-            <p>Preencha o formulário abaixo para realizar a solicitação de seu vaga e em breve entramos em contato para mais informações.</p>
-                <section>
-                    <form id="solicitaVagaForm" method="post" action="/solicitaVaga">
-                        <div class="field first">
-                            <label for="name">Nome Completo</label>
-                            <input type="text" name="name" id="name" placeholder="Nome completo" required/>
-                        </div>
-                        <div class="field">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email" placeholder="email" required/>
-                        </div>
-                        <div class="field">
-                            <label for="telefone">Telefone</label>
-                            <input type="text" name="telefone" id="telefone" placeholder="Telefone de contato" required/>
-                        </div>
-                        <div class="field">
-                            <label for="localDestino">Local de Destino</label>
-                            <select name="localDestino" id="localDestino" required>
-                                <option value="default">Selecionar</option>
-                                <% for(let i = 0; i < locais.length; i++) { %>
-                                    <option value="<%=locais[i]%>"><%=locais[i]%></option>
-                                <% } %>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <input type="submit" class="button submit" value="Solicitar Vaga" />
-                        </div>
-                    </form>
-                </section>
+            <p>Preencha o formulário abaixo para realizar a solicitação de seu vaga e em breve entramos em contato para
+                mais informações.</p>
+            <section>
+                <form id="solicitaVagaForm" method="post" action="/solicitaVaga">
+                    <div class="field first">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" name="name" id="name" placeholder="Nome completo" required/>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" placeholder="email" required/>
+                    </div>
+                    <div class="field">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" name="telefone" id="telefone" placeholder="Telefone de contato" required/>
+                    </div>
+                    <div class="field">
+                        <label for="localDestino">Local de Destino</label>
+                        <select name="localDestino" id="localDestino" required>
+                            <option value="default">Selecionar</option>
+                            <% for(let i = 0; i < locais.length; i++) { %>
+                            <option value="<%= locais[i] %>"><%= locais[i] %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <input type="submit" class="button submit" value="Solicitar Vaga"/>
+                    </div>
+                </form>
+            </section>
+            <section>
+                <ul class="contact">
+                    <li>
+                        <h3>Email</h3>
+                        <a href="#">vanfacilfaleconosco@gmail.com</a>
+                    </li>
+                </ul>
+            </section>
         </div>
     </section>
 
-    <!-- two -->
-    <section id="two" class="wrapper style1 fade-up">
-        <div class="inner">
-            <h2>Fale Conosco</h2>
-            <p>Se voce gostou da nossa ideia, e quer investir ou saber mais sobre nossa proposta, entre em contato
-                conosco, para saber mais informações:</p>
-            <div class="split style1">
-                <section>
-                    <form id="sendEmailForm" method="post" action="/sendemail">
-                        <div class="field half first">
-                            <label for="name">Nome</label>
-                            <input type="text" name="name" id="name"/>
-                        </div>
-                        <div class="field half">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email"/>
-                        </div>
-                        <div class="field">
-                            <label for="message">Mensagem</label>
-                            <textarea name="message" id="message" rows="3"></textarea>
-                        </div>
-                        <div class="field">
-                            <input type="submit" class="button submit" value="Enviar" />
-                        </div>
-                    </form>
-                </section>
-                <section>
-                    <ul class="contact">
-                        <li>
-                            <h3>Email</h3>
-                            <a href="#">vanfacilfaleconosco@gmail.com</a>
-                        </li>
-                        <li>
-                            <h3>Social</h3>
-                            <ul class="icons">
-                                <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
-                                <li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
-                                <li><a href="#" class="fa-github"><span class="label">GitHub</span></a></li>
-                                <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
-                                <li><a href="#" class="fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-            </div>
-        </div>
-    </section>
 </div>
 
-<!-- Footer -->
-<footer id="footer" class="wrapper style1-alt">
-    <div class="inner">
-        <ul class="menu">
-            <li>Design: <a href="https://www.linkedin.com/in/wessimoes">Wesley Simões</a></li>
-            <li>Dev: <a href="https://www.linkedin.com/in/wesley-lopes-641550b4/">Wesley Lopes</a></li>
-        </ul>
-    </div>
-</footer>
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<footer id="footer" class="wrapper style1-alt">-->
+<!--<div class="inner">-->
+<!--<ul class="menu">-->
+<!--<li>Design: <a href="https://www.linkedin.com/in/wessimoes">Wesley Simões</a></li>-->
+<!--<li>Dev: <a href="https://www.linkedin.com/in/wesley-lopes-641550b4/">Wesley Lopes</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</footer>-->
 
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
@@ -178,48 +141,48 @@
 <script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
 <script>
-    $(document).ready(() => {
+    $(document).ready(() = > {
         console.log('lol')
-        $("#solicitaVagaForm").validate({
-            rules:{
-                name: {
-                    required: true,
-                    minlength: 3
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                telefone: {
-                    required: true,
-                    minlength: 8
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                localDestino: {
-                    required:true
-                }
+    $("#solicitaVagaForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 3
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            telefone: {
+                required: true,
+                minlength: 8
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            localDestino: {
+                required: true
             }
-        })
+        }
+    })
 
-        $("#sendEmailForm").validate({
-            rules:{
-                name: {
-                    required: true,
-                    minlength: 3
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                message: {
-                    required: true,
-                    minlength: 10
-                }
+    $("#sendEmailForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 3
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            message: {
+                required: true,
+                minlength: 10
             }
-        })
+        }
+    })
     })
 </script>
 </body>
